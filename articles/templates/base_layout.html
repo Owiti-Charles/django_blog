@@ -1,0 +1,33 @@
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>articles</title>
+    {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock %}
+
+</head>
+<body>
+<div class="wrapper">
+    <h1><a href="{% url 'articles:articles' %}"><img src="{%static 'images/logo.png' %}" alt=""></a></h1>
+    <nav>
+        <ul>
+            <li>
+                <form action="{% url 'accounts:logout'%}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+
+                </form>
+            </li>
+        </ul>
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+{% block scripts %}
+{% endblock %}
+</body>
+</html>
