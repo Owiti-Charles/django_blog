@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 def articles(request):
     article = Article.objects.all().order_by('date')
 
-    return render(request, 'articles/articles.html', {'articles': article})
+    return render(request, 'articles/articles.html', {'articles': article[::-1]})
 
 
 def article_detail(request, slug):
@@ -22,6 +22,7 @@ def create_article(request):
         if form.is_valid():
             article = form.save(commit=False)
             article.author = request.user
+            article.save()
             return redirect('articles:articles')
     else:
         form = forms.CreateArticle()
